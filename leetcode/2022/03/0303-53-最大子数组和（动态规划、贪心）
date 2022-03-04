@@ -1,0 +1,63 @@
+难度简单
+# 题目
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+**子数组** 是数组中的一个连续部分。
+![example](./image/0303-53-示例.png)
+# 解法一
+动态规划，具体看了一个[解法](https://leetcode-cn.com/problems/maximum-subarray/solution/xiang-xi-jie-du-dong-tai-gui-hua-de-shi-xian-yi-li/)
+
+总结如下：  
+动态规划跟“从左到右”这种常规思路相反，它是选中一个结尾，然后往前判断。  
+拿**示例1**举例：  
+`index = 1：以nums[1]结尾的有：[-2, 1], [1]`    
+`index = 2：以nums[2]结尾的有：[-2, 1, -3], [1, -3], [-3]`    
+无论索引此时是多少，当前的最大值要么是自己，要么是左边的值加上自己。但是当前索引并不关心左边是怎么算出来的值，这就有点像递归了。
+```
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    let maxPreNum = nums[0]; // 前面最大值
+    let maxNum = nums[0]; // 总最大值
+    for(let i = 1; i < nums.length; i++){
+        maxPreNum = Math.max(nums[i], maxPreNum + nums[i])
+        maxNum = Math.max(maxNum, maxPreNum);
+    }
+    return maxNum;
+};
+```
+
+# 解法二
+3.4做的
+
+贪心算法。思路：[参考链接](https://leetcode-cn.com/problems/maximum-subarray/solution/dai-ma-sui-xiang-lu-53-zui-da-zi-xu-he-b-xqus/)
+
+贪心贪在上一次的结果如果是负数，就果断舍弃，找下一个数。在这个过程中，同时要记录最大值
+
+我觉得这个gif很清晰，直接搬过来了，图片来源是思路里的：
+
+![gif思路](https://pic.leetcode-cn.com/1609723214-aYExwW-0081Kckwly1gmbec53gn8g30bk08ynpd.gif)
+```
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    let count = 0;
+    let maxCount = nums[0];
+    for(let i = 0; i < nums.length; i++) {
+        count = count + nums[i];
+        if(count > maxCount) {
+            maxCount = count;
+        }
+        // if的顺序要注意。因为count是重置为0，而maxCount初始值在示例1里是-2，
+        // 如果if顺序调换，那maxCount就会被赋值为0，影响到准确性
+        if(count < 0) {
+            count = 0;
+        }
+    }
+    return maxCount;
+};
+```
