@@ -1,0 +1,59 @@
+难度简单
+# 题目
+给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 **和为目标值** target  的那 **两个** 整数，并返回它们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+
+你可以按任意顺序返回答案。
+![example](./image/0305-01-示例.png)
+# 解法一
+暴力破解
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    let result = [];
+    for(let i = 0; i < nums.length; i++){
+        let nextIndex = nums.lastIndexOf(target - nums[i]);
+        if(nextIndex !== -1 && nextIndex !== i) {
+            result.push(i, nextIndex);
+            return result;
+        }
+    }
+    return result;
+};
+```
+# 解法二
+哈希映射，[题解](https://leetcode-cn.com/problems/two-sum/solution/jie-suan-fa-1-liang-shu-zhi-he-by-guanpengchn/)
+
+利用哈希查找降低时间复杂度。
+
+主要思路：逐个遍历数组里的元素，判断 `target - 该元素` 是否存在 map 里，如果存在，就是结果啦。如果不存在，就把该元素存到 map 里。
+
+不需要考虑 map 覆盖的问题，比如示例3，按思路走，第一个3会存到map里，遍历到第二个时，发现map里存在另一个3，就组成答案了。
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    let map = new Map();
+    let result = [];
+    for(let i = 0; i < nums.length; i++) {
+        let value = map.get(target - nums[i]);
+        if(typeof value === 'undefined') {
+            map.set(nums[i], i)
+        } else {
+            result = [value, i]
+            break;
+        }
+    }
+    return result;
+};
+```
