@@ -1,0 +1,55 @@
+问题起因：[2022-0320-13的lc题目](../2022/03/0320-13-罗马数字转整数（哈希表）)
+
+在两种解法中，用对象比用Map的效率要快，不禁起疑：对象挺好用的，为什么还要有Map？
+百度一番，发现对象支持的key的类型比Map支持的key的类型要少得多。
+
+# 对象
+仅支持 数字、字符串、Symbol类型的 key，但如果字符串类似 `'123'`这种，不会与 `123` 作区分。
+
+**举例：**
+```js
+let obj = {};
+obj['123'] = 1;
+obj[123] = 2;
+console.log(obj['123']); // 2
+console.log(obj[123]); // 2
+```
+如果对象的 key 也是对象类型，会自动转成string类型。
+
+**举例：**
+```js
+let obj = {};
+let key1 = { a: 1 };
+let key2 = { b: 2 };
+obj[key1] = 1;
+obj[key2] = 2;
+console.log(obj); // { [object Object]: 2 }
+console.log(obj[key1]); // 2
+console.log(obj[key2] ); // 2
+```
+
+# Map
+Map 的 key 支持很多类型！上面提到的对象不支持的，Map 都支持。
+
+# 对象和 Map 还有哪些区别
+1. Map 实现了迭代器。即可以用 `for...of` 遍历，对象不行。
+2. Map 可以通过 `map.size()` 获取长度，对象不行。
+3. Map 可以保持插入时的顺序，但对象不行。（例子在下面）
+4. Map 可以用ES6语法进行展开，对象不行。
+
+**第3点的例子：**
+```js
+let map = new Map();
+map.set('today', '2022-03-20');
+map.set(0, 'apple');
+map.set(true, 1);
+console.log(map); // Map(3) {'today' => '2022-03-20', 0 => 'apple', true => 1}
+
+let obj = {};
+obj['today'] = '2022-03-20';
+obj[0] = 'apple';
+obj[true] = 1;
+console.log(obj); // {0: 'apple', today: '2022-03-20', true: 1}
+```
+
+那数组和Set的区别呢？Set查元素的效率是O(1)，但数组就只有O(n)？
