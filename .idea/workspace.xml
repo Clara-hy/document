@@ -11,7 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94526188-ab54-446a-a323-55b4f43debd8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/leetcode/2022/04/0405-169-多数元素" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leetcode/思考合集/对象和Map的区别" beforeDir="false" afterPath="$PROJECT_DIR$/leetcode/思考合集/对象和Map的区别" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,9 @@
       <updated>1646190051246</updated>
       <workItem from="1646190053235" duration="295000" />
       <workItem from="1647652910087" duration="673000" />
-      <workItem from="1647742721450" duration="10383000" />
+      <workItem from="1647742721450" duration="10425000" />
+      <workItem from="1647829179663" duration="646000" />
+      <workItem from="1649124630056" duration="2692000" />
     </task>
     <servers />
   </component>
@@ -69,9 +73,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="546" y="227" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1647767501754">
+    <state x="546" y="227" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1649126606884">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="546" y="227" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1647767501754" />
+    <state x="546" y="227" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1649126606884" />
+    <state x="579" y="184" key="FileChooserDialogImpl" timestamp="1647831935422">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="579" y="184" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1647831935422" />
   </component>
 </project>

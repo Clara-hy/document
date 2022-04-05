@@ -1,0 +1,79 @@
+难度简单：[原题链接](https://leetcode-cn.com/problems/majority-element/)
+# 题目
+给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 大于 `⌊n/2⌋` 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+# 示例
+![example](./image/0405-169-示例.jpg)
+
+# 解法一 对象
+最简单的思路。遍历一遍，统计数量。
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    if(nums.length === 1) {
+        return nums[0];
+    }
+
+    let count = Math.floor(nums.length / 2);
+    let obj = {};
+    
+    for(let i = 0; i < nums.length; i++) {
+        let item = nums[i];
+        if(obj[item]) {
+            obj[item]++;
+            if(obj[item] > count) {
+                return item;
+            }
+        } else {
+            obj[item] = 1;
+        }
+    }
+};
+```
+
+# 解法二 排序
+因为题目提到，有一个元素的数量会大于一半。所以可以先进行排序，位于数组索引为 `⌊n/2⌋`的位置
+一定是符合题目要求的元素。数组是从索引0开始，因此 位于`⌊n/2⌋` 的元素就是大于 `⌊n/2⌋`的。
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    nums.sort((a, b) => {
+        return a-b;
+    })
+    return nums[Math.floor(nums.length / 2)];
+};
+``` 
+
+# 解法三
+摩尔投票法。引用评论区第一大佬的思路：
+从第一个数开始count=1，遇到相同的就加1，遇到不同的就减1，
+减到0就重新换个数开始计数，总能找到最多的那个。
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    let count = 0;
+    let result = undefined;
+    nums.forEach(item => {
+        if(!count) {
+            result = item;
+            count++;
+        } else if(result === item) {
+            count++;
+        } else {
+            count--;
+        }
+    });
+    return result;
+};
+```
